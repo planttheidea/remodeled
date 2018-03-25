@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import {hot} from 'react-hot-loader';
 
-import {model} from '../src';
+import model from '../src';
 
 const options = {
   // context

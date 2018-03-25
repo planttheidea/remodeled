@@ -79,11 +79,11 @@ export const getModeled = (options) => {
       addLifecycleMethod(this, 'componentWillMount');
       addLifecycleMethod(this, 'componentDidMount');
       addLifecycleMethod(this, 'componentWillReceiveProps', ['nextProps']);
-      addLifecycleMethod(this, 'componentWillUpdate', ['previousProps', 'previousState']);
+      addLifecycleMethod(this, 'componentWillUpdate', ['nextProps', 'nextState']);
       addLifecycleMethod(this, 'componentDidUpdate', ['previousProps', 'previousState']);
       addLifecycleMethod(this, 'componentWillUnmount');
 
-      if (!options.isPure) {
+      if (!options.isPureComponent) {
         addLifecycleMethod(this, 'shouldComponentUpdate', ['nextProps', 'nextState']);
       }
 

@@ -31,6 +31,6 @@ export const OPTIONS_PROP_TYPES = {
   componentWillUnmount: PropTypes.func,
   componentWillUpdate: PropTypes.func,
   initialState: PropTypes.object,
-  isPure: PropTypes.bool,
+  isPureComponent: PropTypes.bool,
   shouldComponentUpdate: PropTypes.func
 };

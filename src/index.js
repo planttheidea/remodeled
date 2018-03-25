@@ -17,7 +17,7 @@ import {OPTIONS_PROP_TYPES} from './constants';
  * @param {Object} [options={}] the options passed to generate the model
  * @returns {function(ReactComponent): ReactComponent} the decorated component
  */
-export const model = (options = {}) => {
+export default function model(options = {}) {
   PropTypes.checkPropTypes(OPTIONS_PROP_TYPES, options, 'option', 'options');
 
   return (component) => {
@@ -44,4 +44,4 @@ export const model = (options = {}) => {
 
     return ModeledWrapper;
   };
-};
+}
