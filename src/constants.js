@@ -24,12 +24,14 @@ export const LIFECYCLE_METHODS = [
  * @constant {Object} OPTIONS_PROP_TYPES the prop types for checking the options
  */
 export const OPTIONS_PROP_TYPES = {
+  childContextTypes: PropTypes.object,
   componentDidMount: PropTypes.func,
   componentDidUpdate: PropTypes.func,
   componentWillMount: PropTypes.func,
   componentWillReceiveProps: PropTypes.func,
   componentWillUnmount: PropTypes.func,
   componentWillUpdate: PropTypes.func,
+  contextTypes: PropTypes.object,
   initialState: PropTypes.object,
   isPureComponent: PropTypes.bool,
   shouldComponentUpdate: PropTypes.func

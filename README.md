@@ -64,15 +64,17 @@ All of the following standard options are available:
 
 ```javascript
 {
-  getChildContext: Function, // method to get child context
+  childContextTypes: Object, // the childContextTypes to apply to the options (can also be applied to the component)
   componentWillMount: Function, // lifecycle method called prior to mount
   componentDidMount: Function, // lifecycle method called after mount
   componentWillReceiveProps: Function, // lifecycle method called when receiving new props
-  shouldComponentUpdate: Function, // lifecycle method to determine if component should update
   componentWillUpdate: Function, // lifecycle method called prior to update
   componentDidUpdate: Function, // lifecycle method called after update
   componentWillUnmount: Function, // lifecycle method called prior to unmount
-  isPureComponent: boolean // is the instance using the PureComponent optimization
+  contextTypes: Object, // the contextTypes to apply to the options (can also be applied to the component)
+  getChildContext: Function, // method to get child context
+  isPureComponent: boolean, // is the instance using the PureComponent optimization
+  shouldComponentUpdate: Function // lifecycle method to determine if component should update
 }
 ```
 
