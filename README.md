@@ -41,17 +41,15 @@ const initialState = {
 const onClickButton = ({ setState, state }) =>
   setState(({ showChildren }) => ({ showChildren: !showChildren }));
 
-const App = ({ methods, props, state }) => {
-  return (
-    <div>
-      <h1>Toggle those children</h1>
+const App = ({ methods, props, state }) => (
+  <div>
+    <h1>Toggle those children</h1>
 
-      <button onClick={methods.onClickButton}>Click to toggle</button>
+    <button onClick={methods.onClickButton}>Click to toggle</button>
 
-      {state.showChildren && props.children}
-    </div>
-  );
-};
+    {state.showChildren && props.children}
+  </div>
+);
 
 export default model({ componentDidMount, initialState })(App);
 ```
@@ -156,13 +154,9 @@ const Button = ({methods}) =>
 Unlike standard functional components, with `remodeled` you can create child context! Just pass `childContextTypes` and `getChildContext` options.
 
 ```javascript
-const childContextTypes = {hello: PropTypes.string};
+const childContextTypes = { hello: PropTypes.string };
 
-const getChildContext(model) {
-  return {
-    hello: model.props.greeting
-  };
-};
+const getChildContext = model => ({ hello: model.props.greeting });
 ```
 
 ## Browser support
