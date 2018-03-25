@@ -14,16 +14,15 @@ An abstraction for the React API with functional purity
   * [State](#state)
   * [Instance methods](#instance-methods)
   * [Child context](#child-context)
+* [Use with other decorators](#use-with-other-decorators)
 * [Browser support](#browser-support)
 * [Development](#development)
 
 ## Summary
 
-React is a solid, performant implementation of the virtual DOM, and as takes a large number of influences from functional programming to attain it. The one big non-functional piece is the use of the `class` component, which is require whenever use of lifecycle methods or local state is desired.
+React is a solid, performant implementation of the virtual DOM, and as takes a large number of influences from functional programming to attain it. That said, for components that require heavy lifting (lifecycle hooks, internal state, etc.), you are expected to extend the component `class`, which allows for the same pitfalls that object-oriented programming allow.
 
-No longer.
-
-`remodeled` is a thin abstraction layer re-implementing the existing React API in a way that allows for functional purity. keeping concerns separated and improving testability.
+`remodeled` is a thin abstraction layer re-implementing the existing React API in a way that allows for functional purity. keeping concerns separated and improving testability. All aspects of the component instance are available via the `model` passed to all methods in a single object parameter, and rendering is always handled with simple, functional components.
 
 ## Usage
 
@@ -38,7 +37,7 @@ const initialState = {
   showChildren: false
 };
 
-const onClickButton = ({ setState, state }) =>
+const onClickButton = ({ setState }) =>
   setState(({ showChildren }) => ({ showChildren: !showChildren }));
 
 const App = ({ methods, props, state }) => (
@@ -160,6 +159,20 @@ const childContextTypes = { hello: PropTypes.string };
 
 const getChildContext = model => ({ hello: model.props.greeting });
 ```
+
+## Use with other decorators
+
+When composing multiple decorators, make sure that `model` is the first decorator applied. For example:
+
+```javascript
+export default compose(
+  translate(),
+  connect(mapStateToProps, mapDispatchToProps),
+  model() // last in the order of compose means it is the first decorator applied
+)(MyComponent);
+```
+
+Because of the transformation that is made to the API, you will likely experience breakages with these higher-order components if you are not mindful of order.
 
 ## Browser support
 

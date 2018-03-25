@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import {hot} from 'react-hot-loader';
+import {connect, Provider} from 'react-redux';
+import {combineReducers, compose, createStore} from 'redux';
 
 import model from '../src';
 
@@ -78,7 +80,7 @@ Span.contextTypes = {
 const ModeledSpan = model()(Span);
 
 function Div({props, methods, state}) {
-  console.count('rendered');
+  console.log('props', props);
 
   return (
     <div>
@@ -102,6 +104,28 @@ Div.childContextTypes = {
 
 const ModeledDiv = model(options)(Div);
 
+const Section = ({props}) => (
+  <section>
+      Section with the props: {JSON.stringify(props)}
+    <br />
+    {props.children}
+  </section>
+);
+
+const mapStateToProps = () => ({
+  mapped: 'state'
+});
+
+const ConnectedModeledSection = compose(connect(mapStateToProps), model())(Section);
+
+const fooReducer = (state = {}, action) => state;
+
+const store = createStore(
+  combineReducers({
+    foo: fooReducer
+  })
+);
+
 class App extends PureComponent {
   state = {
     counter: 0
@@ -115,21 +139,28 @@ class App extends PureComponent {
 
   render() {
     return (
-      <div>
-        <h1>App</h1>
+      <Provider store={store}>
+        <div>
+          <h1>App</h1>
 
-        <button onClick={this.onClickIncrementCounter}>Click to increment parent counter</button>
+          <button onClick={this.onClickIncrementCounter}>Click to increment parent counter</button>
 
-        <br />
-        <br />
+          <br />
+          <br />
 
-        <ModeledDiv count={this.state.counter}>Basic div with count set to {this.state.counter}</ModeledDiv>
+          <ModeledDiv count={this.state.counter}>Basic div with count set to {this.state.counter}</ModeledDiv>
 
-        <br />
-        <br />
+          <br />
+          <br />
 
-        <ModeledDiv>Another basic div with no count</ModeledDiv>
-      </div>
+          <ModeledDiv>Another basic div with no count</ModeledDiv>
+
+          <br />
+          <br />
+
+          <ConnectedModeledSection>A simple section</ConnectedModeledSection>
+        </div>
+      </Provider>
     );
   }
 }

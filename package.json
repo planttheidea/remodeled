@@ -3,12 +3,26 @@
   "ava": {
     "babel": "inherit",
     "failFast": true,
-    "files": ["test/*.js"],
-    "require": ["babel-register", "test/helpers/setup-enzyme.js"],
-    "source": ["src/*.js"],
+    "files": [
+      "test/*.js"
+    ],
+    "require": [
+      "babel-register",
+      "test/helpers/setup-enzyme.js"
+    ],
+    "source": [
+      "src/*.js"
+    ],
     "verbose": true
   },
-  "browserslist": ["defaults", "Explorer >= 9", "Safari >= 6", "Opera >= 15", "iOS >= 8", "Android >= 4"],
+  "browserslist": [
+    "defaults",
+    "Explorer >= 9",
+    "Safari >= 6",
+    "Opera >= 15",
+    "iOS >= 8",
+    "Android >= 4"
+  ],
   "bugs": {
     "url": "https://github.com/planttheidea/remodeled/issues"
   },
@@ -40,6 +54,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^9.1.0",
@@ -51,7 +67,10 @@
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1"
   },
-  "keywords": ["functional", "react"],
+  "keywords": [
+    "functional",
+    "react"
+  ],
   "license": "MIT",
   "homepage": "https://github.com/planttheidea/remodeled#readme",
   "main": "lib/index.js",
@@ -76,8 +95,7 @@
     "lint": "NODE_ENV=test eslint src",
     "lint:fix": "NODE_ENV=test eslint src --fix",
     "prepublish": "if in-publish; then npm run prepublish:compile; fi",
-    "prepublish:compile":
-      "npm run lint && npm run test:coverage && npm run transpile:lib && npm run transpile:es && npm run dist",
+    "prepublish:compile": "npm run lint && npm run test:coverage && npm run transpile:lib && npm run transpile:es && npm run dist",
     "start": "npm run dev",
     "test": "NODE_PATH=. NODE_ENV=production BABEL_ENV=test ava",
     "test:coverage": "nyc npm test",
