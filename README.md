@@ -7,8 +7,6 @@ An abstraction for the React API with functional purity
 * [Summary](#summary)
 * [Usage](#usage)
 * [Options](#options)
-  * [Instance](#instance)
-  * [isPureComponent](#ispurecomponent)
 * [Model](#model)
   * [Lifecycle methods](#lifecycle-methods)
   * [State](#state)
@@ -54,11 +52,7 @@ export default model({ componentDidMount, initialState, onClickButton })(App);
 
 ## Options
 
-All aspects of the instance are passed via the `options` object to the decorator.
-
-#### Instance
-
-All of the following standard options are available:
+All aspects of the instance are passed via the `options` object to the decorator. All of the following are available:
 
 ```javascript
 {
@@ -76,11 +70,11 @@ All of the following standard options are available:
 }
 ```
 
-Additional function properties provided will be treated as [`instance methods`](#instance-methods). All methods receive the [`model`](#model) object in its full capacitiy, and for specific lifecycle methods additional properties may be provided.
+Additional function properties provided will be treated as [`instance methods`](#instance-methods). All methods receive the full [`model`](#model) object, and for specific lifecycle methods additional properties are provided when appropriate (see [`lifecycle methods`](#lifecycle-methods).
 
 ## Model
 
-`remodeled` is inspired by the interface provided by [`deku`](https://github.com/anthonyshort/deku), where all necessary instance properities are provided as a single object parameter. This consistent interface provides self-documenting code through the use of [`destructuring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) and facilitates encapsulation and testability.
+`remodeled` is inspired by the interface provided by [`deku`](https://github.com/anthonyshort/deku), where all instance properities are provided as a single object parameter. This consistent interface provides self-documenting code through the use of [`destructuring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) and facilitates encapsulation and testability.
 
 The model properties passed to all functions are:
 
@@ -93,11 +87,11 @@ The model properties passed to all functions are:
   state: Object // the internal state of the instance
 ```
 
-These are all the same properties you know from React, but encapsulated for convenience.
+Most of these are the same properties you know from React, but encapsulated for convenience. `getDOMNode` is a convenience method to be used in place of `findDOMNode(this)`, and `methods` is a namespace for all instance methods passed.
 
 #### Lifecycle methods
 
-In addition to these properties, certain lifecycle methods will provide the following:
+In addition to the `model` properties, certain lifecycle methods will include the following:
 
 **componentWillReceiveProps**
 
@@ -147,6 +141,12 @@ const onClickButton = ({ setState, state }) =>
 ...
 const Button = ({methods}) =>
   <button onClick={methods.onClickButton}>Click me!</button>;
+```
+
+In addition to the `model` properties, instance methods will include the following:
+
+```javascript
+args: Array<any> // the arguments passed to the method when called
 ```
 
 #### Child context
