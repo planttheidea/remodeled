@@ -30,8 +30,7 @@ React is a solid, performant implementation of the virtual DOM, and as takes a l
 import React from "react";
 import model from "remodeled";
 
-const componentDidMount = ({ props, setState, state }) =>
-  console.log(state.showChildren);
+const componentDidMount = ({ state }) => console.log(state.showChildren);
 
 const initialState = {
   showChildren: false
