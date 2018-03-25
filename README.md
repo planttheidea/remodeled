@@ -80,7 +80,7 @@ Additional function properties provided will be treated as [`instance methods`](
 
 ## Model
 
-`remodeled` is inspired by the interface provided by [`deku`](https://github.com/anthonyshort/deku), where all necessary instance properities are provided as a single object parameter. This consistent interface provides self-documenting code through the use of [`destructuring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) and facilitates composition.
+`remodeled` is inspired by the interface provided by [`deku`](https://github.com/anthonyshort/deku), where all necessary instance properities are provided as a single object parameter. This consistent interface provides self-documenting code through the use of [`destructuring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) and facilitates encapsulation and testability.
 
 The model properties passed to all functions are:
 
