@@ -31,22 +31,25 @@ No longer.
 import React from "react";
 import model from "remodeled";
 
-const componentDidMount = ({ props, setState }) =>
-  setState(() => {
-    return {
-      hasChildren: !!props.children
-    };
-  });
+const componentDidMount = ({ props, setState, state }) =>
+  console.log(state.showChildren);
 
 const initialState = {
-  hasChildren: false
+  showChildren: false
 };
 
-const App = ({ props, state }) => {
-  return state.hasChildren ? (
-    <div>{props.children}</div>
-  ) : (
-    <div>Nothing to show!</div>
+const onClickButton = ({ setState, state }) =>
+  setState(({ showChildren }) => ({ showChildren: !showChildren }));
+
+const App = ({ methods, props, state }) => {
+  return (
+    <div>
+      <h1>Toggle those children</h1>
+
+      <button onClick={methods.onClickButton}>Click to toggle</button>
+
+      {state.showChildren && props.children}
+    </div>
   );
 };
 
@@ -59,19 +62,23 @@ All aspects of the instance are passed via the `options` object to the decorator
 
 #### Instance
 
-You can pass the following values in options:
+All of the following standard options are available:
 
-* Lifecycle methods
-* Instance methods
-* State instantiation
+```javascript
+{
+  getChildContext: Function, // method to get child context
+  componentWillMount: Function, // lifecycle method called prior to mount
+  componentDidMount: Function, // lifecycle method called after mount
+  componentWillReceiveProps: Function, // lifecycle method called when receiving new props
+  shouldComponentUpdate: Function, // lifecycle method to determine if component should update
+  componentWillUpdate: Function, // lifecycle method called prior to update
+  componentDidUpdate: Function, // lifecycle method called after update
+  componentWillUnmount: Function, // lifecycle method called prior to unmount
+  isPureComponent: boolean // is the instance using the PureComponent optimization
+}
+```
 
-All methods receive the [`model`](#model) object in its full capacitiy, and depending on the method it may receive additional properties.
-
-In addition to these standard class attributes, the following internal options are available:
-
-#### isPureComponent
-
-Is the instance based on the `PureComponent` optimization instead of the standard `Component`. Defaults to _false_.
+Additional function properties provided will be treated as [`instance methods`](#instance-methods). All methods receive the [`model`](#model) object in its full capacitiy, and for specific lifecycle methods additional properties may be provided.
 
 ## Model
 
@@ -128,7 +135,7 @@ previousState: Object // the internal state of the instance used in the previous
 State operates just like the standard `class` component, with the exception of the access being from the model.
 
 ```javascript
-const onButtonClick = ({ setState, state }) =>
+const onClickButton = ({ setState, state }) =>
   setState(({ isToggled }) => ({ isToggled: !isToggled }));
 ```
 
@@ -137,7 +144,7 @@ const onButtonClick = ({ setState, state }) =>
 Any method declared on the [`options`](#options) that is not a known lifecycle method is considered an instance method, and will be available under the `methods` property in the `model`.
 
 ```javascript
-const onButtonClick = ({ setState, state }) =>
+const onClickButton = ({ setState, state }) =>
   setState(({ isToggled }) => ({ isToggled: !isToggled }));
 ...
 const Button = ({methods}) =>
