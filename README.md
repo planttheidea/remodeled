@@ -49,7 +49,7 @@ const App = ({ methods, props, state }) => (
   </div>
 );
 
-export default model({ componentDidMount, initialState })(App);
+export default model({ componentDidMount, initialState, onClickButton })(App);
 ```
 
 ## Options
