@@ -4,17 +4,21 @@ An abstraction for the React API with functional purity
 
 ## Table of contents
 
-* [Summary](#summary)
-* [Usage](#usage)
-* [Options](#options)
-* [Model](#model)
-  * [Lifecycle methods](#lifecycle-methods)
-  * [State](#state)
-  * [Instance methods](#instance-methods)
-  * [Child context](#child-context)
-* [Use with other decorators](#use-with-other-decorators)
-* [Browser support](#browser-support)
-* [Development](#development)
+- [Summary](#summary)
+- [Usage](#usage)
+- [Options](#options)
+- [Model](#model)
+  - [Lifecycle methods](#lifecycle-methods)
+  - [State](#state)
+  - [Instance methods](#instance-methods)
+  - [Child context](#child-context)
+- [Use with other decorators](#use-with-other-decorators)
+- [Browser support](#browser-support)
+- [Development](#development)
+
+# DEPRECATION NOTICE
+
+This library has been deprecated in favor of [`react-parm`](https://github.com/planttheidea/react-parm), which can accomplish all the same feats with `createComponent` that this library does without breaking the contract for components.
 
 ## Summary
 
@@ -166,7 +170,10 @@ When composing multiple decorators, make sure that `model` is the first decorato
 ```javascript
 export default compose(
   translate(),
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   model() // last in the order of compose means it is the first decorator applied
 )(MyComponent);
 ```
@@ -175,29 +182,29 @@ Because of the transformation that is made to the API, you will likely experienc
 
 ## Browser support
 
-* Chrome (all versions)
-* Firefox (all versions)
-* Edge (all versions)
-* Opera 15+
-* IE 9+
-* Safari 6+
-* iOS 8+
-* Android 4+
+- Chrome (all versions)
+- Firefox (all versions)
+- Edge (all versions)
+- Opera 15+
+- IE 9+
+- Safari 6+
+- iOS 8+
+- Android 4+
 
 ## Development
 
 Standard stuff, clone the repo and `npm install` dependencies. The npm scripts available:
 
-* `build` => run webpack to build development `dist` file with NODE_ENV=development
-* `build:minified` => run webpack to build production `dist` file with NODE_ENV=production
-* `dev` => run webpack dev server to run example app / playground
-* `dist` => runs `build` and `build:minified`
-* `lint` => run ESLint against all files in the `src` folder
-* `prepublish` => runs `prepublish:compile` when publishing
-* `prepublish:compile` => run `lint`, `test:coverage`, `transpile:es`, `transpile:lib`, `dist`
-* `test` => run AVA test functions with `NODE_ENV=test`
-* `test:coverage` => run `test` but with `nyc` for coverage checker
-* `test:watch` => run `test`, but with persistent watcher
-* `transpile:lib` => run babel against all files in `src` to create files in `lib`
-* `transpile:es` => run babel against all files in `src` to create files in `es`, preserving ES2015 modules (for
+- `build` => run webpack to build development `dist` file with NODE_ENV=development
+- `build:minified` => run webpack to build production `dist` file with NODE_ENV=production
+- `dev` => run webpack dev server to run example app / playground
+- `dist` => runs `build` and `build:minified`
+- `lint` => run ESLint against all files in the `src` folder
+- `prepublish` => runs `prepublish:compile` when publishing
+- `prepublish:compile` => run `lint`, `test:coverage`, `transpile:es`, `transpile:lib`, `dist`
+- `test` => run AVA test functions with `NODE_ENV=test`
+- `test:coverage` => run `test` but with `nyc` for coverage checker
+- `test:watch` => run `test`, but with persistent watcher
+- `transpile:lib` => run babel against all files in `src` to create files in `lib`
+- `transpile:es` => run babel against all files in `src` to create files in `es`, preserving ES2015 modules (for
   [`pkg.module`](https://github.com/rollup/rollup/wiki/pkg.module))
