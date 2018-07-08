@@ -56,7 +56,7 @@ export default model({ componentDidMount, initialState, onClickButton })(App);
 
 ## Options
 
-All aspects of the instance are passed via the `options` object to the decorator. All of the following are available:
+All aspects of the instance can be passed via the `options` object to the decorator. All of the following are available:
 
 ```javascript
 {
