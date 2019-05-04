@@ -1,7 +1,5 @@
 // test
 import test from 'ava';
-import {shallow} from 'enzyme';
-import toJson from 'enzyme-to-json';
 import React from 'react';
 
 // src
@@ -9,7 +7,7 @@ import * as index from 'src/index';
 
 test('if model will return a decorator the wraps the component correctly', (t) => {
   const options = {
-    isPureComponent: true
+    isPureComponent: true,
   };
 
   const getModeledComponent = index.default(options);
@@ -24,7 +22,7 @@ test('if model will return a decorator the wraps the component correctly', (t) =
   t.is(Result.displayName, `Modeled(${Component.name})`);
 
   const props = {
-    'data-foo': 'bar'
+    'data-foo': 'bar',
   };
 
   const result = Result(props);
@@ -36,9 +34,9 @@ test('if model will return a decorator the wraps the component correctly', (t) =
     __options: {
       ...options,
       childContextTypes: undefined,
-      contextTypes: undefined
+      contextTypes: undefined,
     },
-    'data-foo': 'bar'
+    'data-foo': 'bar',
   });
 });
 
@@ -59,7 +57,7 @@ test('if model will return a decorator the wraps the component correctly when no
 
 test('if model will return a decorator the wraps the component correctly with the displayName passed', (t) => {
   const options = {
-    isPureComponent: true
+    isPureComponent: true,
   };
 
   const getModeledComponent = index.default(options);
@@ -78,7 +76,7 @@ test('if model will return a decorator the wraps the component correctly with th
 
 test('if model will return a decorator the wraps the component correctly with the fallback name passed', (t) => {
   const options = {
-    isPureComponent: true
+    isPureComponent: true,
   };
 
   const getModeledComponent = index.default(options);

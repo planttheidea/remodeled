@@ -20,11 +20,11 @@ import {OPTIONS_PROP_TYPES} from './constants';
 export default function model(options = {}) {
   PropTypes.checkPropTypes(OPTIONS_PROP_TYPES, options, 'option', 'options');
 
-  return (component) => {
+  return function modeled(component) {
     const coalescedOptions = {
       ...options,
       childContextTypes: options.childContextTypes || component.childContextTypes,
-      contextTypes: options.contextTypes || component.contextTypes
+      contextTypes: options.contextTypes || component.contextTypes,
     };
     const Modeled = getModeled(coalescedOptions);
 

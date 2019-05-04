@@ -4,12 +4,12 @@ import sinon from 'sinon';
 
 // src
 import * as utils from 'src/utils';
-import {IGNORED_PROPS, LIFECYCLE_METHODS} from 'src/constants';
+import {IGNORED_PROPS} from 'src/constants';
 
 test('if getPassedProps will return the props with the ignored props removed', (t) => {
   const props = {
     foo: 'bar',
-    [IGNORED_PROPS[0]]: 'baz'
+    [IGNORED_PROPS[0]]: 'baz',
   };
 
   const result = utils.getPassedProps(props);
@@ -27,14 +27,14 @@ test('if identity will return the first argument passed', (t) => {
 
 test('if createInstanceMethod will create an instance method that will call with the model plus the args', (t) => {
   const response = {
-    method: 'result'
+    method: 'result',
   };
 
   const instance = {
     getModel: sinon.stub().returnsArg(0),
     props: {
-      foo: 'bar'
-    }
+      foo: 'bar',
+    },
   };
   const method = sinon.stub().returns(response);
 
@@ -51,7 +51,7 @@ test('if createInstanceMethod will create an instance method that will call with
   t.true(
     method.calledWith({
       ...instance.props,
-      args
+      args,
     })
   );
 
@@ -63,7 +63,7 @@ test('if getInstanceMethods will return the methods for the instance', (t) => {
   const options = {
     componentDidMount() {},
     foo: 'bar',
-    onClick() {}
+    onClick() {},
   };
 
   const result = utils.getInstanceMethods(instance, options);
@@ -76,8 +76,8 @@ test('if getPassedModel will return the model based on props when no extraProper
   const instance = {
     getModel: sinon.stub().returnsArg(0),
     props: {
-      foo: 'bar'
-    }
+      foo: 'bar',
+    },
   };
   const extraProperties = [];
   const args = [];
@@ -91,8 +91,8 @@ test('if getPassedModel will return the model based on props when extraPropertie
   const instance = {
     getModel: sinon.stub().returnsArg(0),
     props: {
-      foo: 'bar'
-    }
+      foo: 'bar',
+    },
   };
   const extraProperties = ['foo'];
   const args = [{bar: 'baz'}];
@@ -101,7 +101,7 @@ test('if getPassedModel will return the model based on props when extraPropertie
 
   t.deepEqual(result, {
     ...instance.props,
-    foo: args[0]
+    foo: args[0],
   });
 });
 
@@ -111,9 +111,9 @@ test('if addLifecycleMethod will add the lifecycle method to the instance', (t) 
     getModel: sinon.stub().returnsArg(0),
     props: {
       __options: {
-        [method]: sinon.stub().returnsArg(0)
-      }
-    }
+        [method]: sinon.stub().returnsArg(0),
+      },
+    },
   };
   const extraProperties = [];
 
@@ -137,9 +137,9 @@ test('if addLifecycleMethod will add the lifecycle method to the instance when e
     getModel: sinon.stub().returnsArg(0),
     props: {
       __options: {
-        [method]: sinon.stub().returnsArg(0)
-      }
-    }
+        [method]: sinon.stub().returnsArg(0),
+      },
+    },
   };
   const extraProperties = undefined;
 
@@ -163,9 +163,9 @@ test('if addLifecycleMethod will not add the lifecycle method when it is not a f
     getModel: sinon.stub().returnsArg(0),
     props: {
       __options: {
-        [method]: 'not a function'
-      }
-    }
+        [method]: 'not a function',
+      },
+    },
   };
   const extraProperties = undefined;
 

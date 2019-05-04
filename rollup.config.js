@@ -2,7 +2,7 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
-import uglify from 'rollup-plugin-uglify';
+import {uglify} from 'rollup-plugin-uglify';
 
 const DEV_CONFIGURATION = {
   external: ['react', 'react-dom'],
@@ -13,23 +13,22 @@ const DEV_CONFIGURATION = {
     format: 'umd',
     globals: {
       react: 'React',
-      'react-dom': 'ReactDOM'
+      'react-dom': 'ReactDOM',
     },
     name: 'Remodeled',
-    sourcemap: true
+    sourcemap: true,
   },
   plugins: [
     resolve({
-      main: true,
-      module: true
+      mainFields: ['module', 'main'],
     }),
     commonjs({
-      include: 'node_modules/**'
+      include: 'node_modules/**',
     }),
     babel({
-      exclude: 'node_modules/**'
-    })
-  ]
+      exclude: 'node_modules/**',
+    }),
+  ],
 };
 
 const PROD_CONFIGURATION = {
@@ -41,26 +40,25 @@ const PROD_CONFIGURATION = {
     format: 'umd',
     globals: {
       react: 'React',
-      'react-dom': 'ReactDOM'
+      'react-dom': 'ReactDOM',
     },
-    name: 'Remodeled'
+    name: 'Remodeled',
   },
   plugins: [
     replace({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     resolve({
-      main: true,
-      module: true
+      mainFields: ['module', 'main'],
     }),
     commonjs({
-      include: 'node_modules/**'
+      include: 'node_modules/**',
     }),
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
     }),
-    uglify()
-  ]
+    uglify(),
+  ],
 };
 
 export default [DEV_CONFIGURATION, PROD_CONFIGURATION];

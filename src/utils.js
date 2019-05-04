@@ -1,8 +1,8 @@
-// external dependencies
-import React from 'react';
-
 // constants
-import {IGNORED_PROPS, LIFECYCLE_METHODS} from './constants';
+import {
+  IGNORED_PROPS,
+  LIFECYCLE_METHODS,
+} from './constants';
 
 /**
  * @function getPassedProps
@@ -51,7 +51,7 @@ export const EXTRA_PROPERTIES_GETTERS = [getPassedProps, identity];
 export const createInstanceMethod = (instance, method) => (...args) =>
   method({
     ...instance.getModel(instance.props),
-    args
+    args,
   });
 
 /**
@@ -107,8 +107,8 @@ export const addLifecycleMethod = (instance, method, extraProperties = []) => {
   const lifecycleMethod = instance.props.__options[method];
 
   if (typeof lifecycleMethod === 'function') {
-    instance[method] = function() {
-      return lifecycleMethod(getPassedModel(instance, extraProperties, arguments));
+    instance[method] = function(...args) {
+      return lifecycleMethod(getPassedModel(instance, extraProperties, args));
     };
   }
 };

@@ -17,7 +17,7 @@ export const LIFECYCLE_METHODS = [
   'shouldComponentUpdate',
   'componentWillUpdate',
   'componentDidUpdate',
-  'componentWillUnmount'
+  'componentWillUnmount',
 ];
 
 /**
@@ -34,5 +34,5 @@ export const OPTIONS_PROP_TYPES = {
   contextTypes: PropTypes.object,
   initialState: PropTypes.object,
   isPureComponent: PropTypes.bool,
-  shouldComponentUpdate: PropTypes.func
+  shouldComponentUpdate: PropTypes.func,
 };

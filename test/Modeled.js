@@ -16,9 +16,9 @@ test('if getInitialState will return the initialState passed', (t) => {
   const instance = {
     props: {
       __options: {
-        initialState: 'initialState'
-      }
-    }
+        initialState: 'initialState',
+      },
+    },
   };
 
   const result = component.getInitialState(instance);
@@ -29,8 +29,8 @@ test('if getInitialState will return the initialState passed', (t) => {
 test('if getInitialState will return an empty object when no initialState passed', (t) => {
   const instance = {
     props: {
-      __options: {}
-    }
+      __options: {},
+    },
   };
 
   const result = component.getInitialState(instance);
@@ -58,16 +58,16 @@ test('if createGetDOMNode will call findDOMNode on the instance', (t) => {
 test('if createGetModel creates a method that gets the model passed to all functions', (t) => {
   const instance = {
     context: {
-      deep: 'context'
+      deep: 'context',
     },
     getDOMNode() {},
     methods: {
-      deep: 'methods'
+      deep: 'methods',
     },
     setState() {},
     state: {
-      deep: 'state'
-    }
+      deep: 'state',
+    },
   };
 
   const getModel = component.createGetModel(instance);
@@ -75,7 +75,7 @@ test('if createGetModel creates a method that gets the model passed to all funct
   const stub = sinon.stub(utils, 'getPassedProps').returnsArg(0);
 
   const props = {
-    deep: 'props'
+    deep: 'props',
   };
 
   const result = getModel(props);
@@ -91,7 +91,7 @@ test('if createGetModel creates a method that gets the model passed to all funct
     methods: instance.methods,
     props,
     setState: instance.setState,
-    state: instance.state
+    state: instance.state,
   });
 });
 
@@ -105,7 +105,7 @@ test('if Modeled will render correctly', (t) => {
     },
     __options: options,
     children: 'child',
-    'data-foo': 'bar'
+    'data-foo': 'bar',
   };
 
   const wrapper = shallow(<Modeled {...props} />);
@@ -115,7 +115,7 @@ test('if Modeled will render correctly', (t) => {
 
 test('if Modeled will render correctly when pure', (t) => {
   const options = {
-    isPureComponent: true
+    isPureComponent: true,
   };
   const Modeled = component.getModeled(options);
 
@@ -125,7 +125,7 @@ test('if Modeled will render correctly when pure', (t) => {
     },
     __options: options,
     children: 'child',
-    'data-foo': 'bar'
+    'data-foo': 'bar',
   };
 
   const wrapper = shallow(<Modeled {...props} />);

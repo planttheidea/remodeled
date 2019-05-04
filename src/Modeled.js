@@ -4,7 +4,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // utils
-import {addLifecycleMethod, getInstanceMethods, getPassedProps} from './utils';
+import {
+  addLifecycleMethod,
+  getInstanceMethods,
+  getPassedProps,
+} from './utils';
 
 /**
  * @function getInitialState
@@ -43,7 +47,7 @@ export const createGetModel = (instance) => (props) => ({
   methods: instance.methods,
   props: getPassedProps(props),
   setState: instance.setState,
-  state: instance.state
+  state: instance.state,
 });
 
 export const getModeled = (options) => {
@@ -54,7 +58,7 @@ export const getModeled = (options) => {
 
     static propTypes = {
       __component: PropTypes.func.isRequired,
-      __options: PropTypes.object.isRequired
+      __options: PropTypes.object.isRequired,
     };
 
     static contextTypes = options.contextTypes;
